@@ -569,12 +569,6 @@
         // Dados das Matérias (simulando API)
         const subjectsData = [
             {
-                "icon": "🧮",
-                "title": "Matemática Avançada",
-                "description": "Álgebra, Geometria, Cálculo e Estatística para vestibulares",
-                "topics": ["Funções", "Trigonometria", "Matrizes", "Probabilidade"]
-            },
-            {
                 "icon": "🧪",
                 "title": "Ciências da Natureza",
                 "description": "Física, Química e Biologia integradas",
@@ -651,22 +645,32 @@
 
         // Carregar Matérias Dinamicamente
         function loadSubjects() {
-            const container = document.getElementById('subjects-container');
-            
-            subjectsData.forEach(subject => {
-                const card = document.createElement('div');
-                card.className = 'subject-card';
-                card.innerHTML = `
-                    <div class="subject-icon">${subject.icon}</div>
-                    <h3 class="subject-title">${subject.title}</h3>
-                    <p>${subject.description}</p>
-                    <ul style="margin-top: 1rem;">
-                        ${subject.topics.map(topic => `<li>${topic}</li>`).join('')}
-                    </ul>
-                `;
-                container.appendChild(card);
+    const container = document.getElementById('subjects-container');
+    
+    subjectsData.forEach(subject => {
+        const card = document.createElement('div');
+        card.className = 'subject-card';
+        
+        // Adiciona link para Matemática
+        if (subject.title === "Matemática") {
+            card.addEventListener('click', () => {
+                window.location.href = 'matematica.html';
             });
+            card.style.cursor = 'pointer'; // Muda o cursor para indicar que é clicável
         }
+
+        card.innerHTML = `
+            <div class="subject-icon">${subject.icon}</div>
+            <h3 class="subject-title">${subject.title}</h3>
+            <p>${subject.description}</p>
+            <ul style="margin-top: 1rem;">
+                ${subject.topics.map(topic => `<li>${topic}</li>`).join('')}
+            </ul>
+        `;
+        
+        container.appendChild(card);
+    });
+}
 
         // Tema Dark/Light com Preview
         function setupTheme() {

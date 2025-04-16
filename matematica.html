@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="icon" href="https://img.icons8.com/fluency/48/000000/graduation-cap.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemática | Mentoria Vestibular</title>
+    <style>
+        :root {
+            --primary: #FFD700;
+            --primary-light: #FFE55C;
+            --secondary: #0a192f;
+            --secondary-light: #172a46;
+            --bg: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --section-padding: 4rem;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --primary: #FFA500;
+            --primary-light: #FFB732;
+            --secondary: #1a1a2e;
+            --secondary-light: #2a2a4a;
+            --bg: #0a192f;
+            --text: #f8f8f8;
+            --text-light: #cccccc;
+            --card-bg: rgba(26, 26, 46, 0.9);
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Header e Navegação */
+        header {
+            padding: 1.2rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--box-shadow);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Seções */
+        .section {
+            padding: var(--section-padding) 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            scroll-margin-top: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: fit-content;
+            line-height: 1.2;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 3px;
+        }
+
+        /* Tópicos */
+        .topics-container {
+            margin-top: 2rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+
+        .topic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .topic-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .topic-content {
+            margin-top: 1rem;
+            flex-grow: 1;
+        }
+
+        .topic-content ul {
+            list-style-type: none;
+        }
+
+        .topic-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .topic-content li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .topic-content li:hover {
+            color: var(--text);
+            transform: translateX(5px);
+        }
+
+        /* Botão Voltar */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .back-button::before {
+            content: '←';
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: var(--section-padding);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-footer {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .copyright {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Efeitos de Scroll */
+        [data-animate] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        [data-animate="left"] {
+            transform: translateX(-30px);
+        }
+
+        [data-animate="right"] {
+            transform: translateX(30px);
+        }
+
+        [data-animate].animate {
+            opacity: 1;
+            transform: translate(0);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            :root {
+                --section-padding: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --section-padding: 2.5rem;
+            }
+
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .section {
+                padding: var(--section-padding) 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .topic-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <header>
+        <nav>
+            <div class="logo">Guilherme</div>
+            <div class="nav-links">
+                <a href="index.html#home">Início</a>
+                <a href="index.html#materias">Matérias</a>
+                <a href="index.html#metodologia">Metodologia</a>
+                <a href="index.html#contato">Contato</a>
+            </div>
+            <button class="theme-toggle" aria-label="Alternar tema">🌓</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section" style="padding-top: 100px;">
+            <a href="index.html#materias" class="back-button">Voltar para Matérias</a>
+            <h1 class="section-title" data-animate>Matemática</h1>
+            
+            <div class="topics-container">
+                <div class="topics-grid">
+                    <!-- Tópico 1 -->
+                    <div class="topic-card" data-animate>
+                        <h2 class="topic-title">Tópicos Introdutórios</h2>
+                        <div class="topic-content">
+                            <ul>
+                                <li>Conjuntos numéricos</li>
+                                <li>Operações fundamentais</li>
+                                <li>Potenciação e radiciação</li>
+                                <li>Razões e proporções</li>
+                                <li>Regra de três</li>
+                                <li>Porcentagem e juros</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Tópico 2 -->
+                    <div class="topic-card" data-animate="left">
+                        <h2 class="topic-title">Álgebra e Aritmética</h2>
+                        <div class="topic-content">
+                            <ul>
+                                <li>Equações e inequações</li>
+                                <li>Sistemas lineares</li>
+                                <li>Polinômios e fatoração</li>
+                                <li>Progressões (PA e PG)</li>
+                                <li>Análise combinatória</li>
+                                <li>Probabilidade</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Tópico 3 -->
+                    <div class="topic-card" data-animate="right">
+                        <h2 class="topic-title">Trigonometria</h2>
+                        <div class="topic-content">
+                            <ul>
+                                <li>Razões trigonométricas</li>
+                                <li>Relações fundamentais</li>
+                                <li>Lei dos senos e cossenos</li>
+                                <li>Funções trigonométricas</li>
+                                <li>Equações trigonométricas</li>
+                                <li>Identidades trigonométricas</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Tópico 4 -->
+                    <div class="topic-card" data-animate="left">
+                        <h2 class="topic-title">Geometria</h2>
+                        <div class="topic-content">
+                            <ul>
+                                <li>Geometria plana</li>
+                                <li>Geometria espacial</li>
+                                <li>Geometria analítica</li>
+                                <li>Áreas e volumes</li>
+                                <li>Retas e circunferências</li>
+                                <li>Cônicas e vetores</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Tópico 5 -->
+                    <div class="topic-card" data-animate="right">
+                        <h2 class="topic-title">Questões Resolvidas</h2>
+                        <div class="topic-content">
+                            <ul>
+                                <li>ENEM resolvidas passo a passo</li>
+                                <li>FUVEST resolvidas detalhadamente</li>
+                                <li>UNICAMP com resoluções comentadas</li>
+                                <li>UNESP resolvidas estrategicamente</li>
+                                <li>Estratégias de resolução</li>
+                                <li>Dicas para otimizar tempo</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tópico 6 -->
+                    <div class="topic-card" data-animate>
+                        <h2 class="topic-title">Matemática Avançada</h2>
+                        <div class="topic-content">
+                            <ul>
+                                <li>Logaritmos</li>
+                                <li>Matrizes e determinantes</li>
+                                <li>Números complexos</li>
+                                <li>Polinômios avançados</li>
+                                <li>Geometria analítica avançada</li>
+                                <li>Introdução ao cálculo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo-footer">Guilherme</div>
+            <p class="footer-text">Mentoria Especializada para Vestibulares com abordagem personalizada e metodologia científica</p>
+            <div class="social-links">
+                <a href="https://api.whatsapp.com/send/?phone=5517988101676&text=Ol%C3%A1+Guilherme%2C+gostaria+de+saber+mais+sobre+sua+mentoria+para+vestibular%21&type=phone_number&app_absent=0" class="social-link" target="_blank" aria-label="WhatsApp">📱</a>
+                <a href="https://mail.google.com/mail/u/1/#inbox?compose=GTvVlcSDbvCBWFNNTGvpkFlSQxPLpsbHMmxrlVxNHzjDGHKLzJjlgPcBHDQHkSgZmxKXWtGpfTgjr" class="social-link" target="_blank" aria-label="Email">📧</a>
+                <a href="https://www.linkedin.com/in/guilherme-soares-de-souza-868608276/" class="social-link" target="_blank" aria-label="LinkedIn">💼</a>
+            </div>
+            <p class="copyright">© 2023 Guilherme Mentoria. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sistema de Tema Avançado
+        class ThemeManager {
+            constructor() {
+                this.themeToggle = document.querySelector('.theme-toggle');
+                this.init();
+            }
+
+            init() {
+                this.loadTheme();
+                this.setupEventListeners();
+            }
+
+            loadTheme() {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                document.body.dataset.theme = savedTheme;
+                this.updateToggleIcon(savedTheme);
+            }
+
+            setupEventListeners() {
+                this.themeToggle.addEventListener('click', () => this.toggleTheme());
+            }
+
+            toggleTheme() {
+                const currentTheme = document.body.dataset.theme;
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.body.dataset.theme = newTheme;
+                localStorage.setItem('theme', newTheme);
+                this.updateToggleIcon(newTheme);
+                
+                // Dispara evento personalizado para outros componentes
+                document.dispatchEvent(new CustomEvent('themeChanged', { detail: newTheme }));
+            }
+
+            updateToggleIcon(theme) {
+                this.themeToggle.textContent = theme === 'dark' ? '🌓' : '🌞';
+                this.themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Alternar para tema claro' : 'Alternar para tema escuro');
+            }
+        }
+
+        // Sistema de Animação ao Scroll
+        class ScrollAnimator {
+            constructor() {
+                this.animateElements = document.querySelectorAll('[data-animate]');
+                this.init();
+            }
+
+            init() {
+                this.setupObserver();
+            }
+
+            setupObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                this.animateElements.forEach(el => observer.observe(el));
+            }
+        }
+
+        // Inicialização quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', () => {
+            new ThemeManager();
+            new ScrollAnimator();
+            
+            // Efeito de digitação opcional (pode ser adicionado posteriormente)
+            // new TypeWriterEffect();
+        });
+    </script>
+</body>
+</html>
